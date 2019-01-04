@@ -14,9 +14,7 @@ public class RayTest : MonoBehaviour
         get
         {
             if (!_mat)
-                _mat = new Material(RayShader);
-            if(_mat.shader != RayShader)
-                _mat.shader = RayShader;
+                _mat = new Material(Shader.Find("Hidden/RayTest"));
             return _mat;
         }
     }

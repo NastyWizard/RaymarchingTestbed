@@ -15,8 +15,6 @@ public class RayTest : MonoBehaviour
         {
             if (!_mat)
                 _mat = new Material(RayShader);
-            if(_mat.shader != RayShader)
-                _mat.shader = RayShader;
             return _mat;
         }
     }
