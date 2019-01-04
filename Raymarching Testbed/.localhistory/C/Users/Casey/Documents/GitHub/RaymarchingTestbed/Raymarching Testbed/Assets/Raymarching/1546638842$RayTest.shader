@@ -87,13 +87,31 @@
 				float3 planePos = p + float3(0, 0, 0);
 				float plane = sdPlane(planePos, float4(0, 1, 0, 0));
 				//
-				float3 spherePos = p + float3(0,0, 0);
-				float sphere = sdSphere(opHRep(spherePos,2,2), 1);
-				return opUnion(sphere, plane);
+				//float3 spherePos = p + float3(0,0, 0);
+				//float sphere = sdSphere(spherePos, 1);
+				//return opUnion(sphere, plane);
 
-				//return opSub(FBMNoise(p, 5, 0.5, 3), plane);
+				return opSub(FBMNoise(p, 5, 0.5, 3), plane);
 
 				//return opUnion(opSub(plane2, opSub(plane,m)),sdPlane(p + float3(0,5.5,0),float4(0,1,0,0)));
+			}
+
+
+			//
+
+			void CloudLighting(out float4 ret, float den, float dif, float t) 
+			{
+				float3 lin = float3(0.65, .7, .75)*1.4 + float3(1.0, .6, .3)*dif;
+
+				// lerp from lighter colour to darker colour based on density, density is also alpha
+				float4 col = float4(lerp(float3(1.0, .95, .8), float3(.2, .25, .35), den), den);
+				col.rgb *= lin;
+				//col.rgb = lerp(col.rgb, float3(0.12, 0.5, .8), 1.0 - t);
+
+				// blending
+				col.a *= .4;
+				col.rgb *= col.a;
+				ret = col;
 			}
 
 			float4 Lighting(float3 p, float3 norm, float3 lightDir, float3 color = float3(1,1,1))
@@ -166,6 +184,7 @@
 
 						ret =( Lighting(p, norm, lightDir)+ float2(f,0).rrrg) * float4(1,1,1,1);
 
+						//ret = lerp(ret, fog, 1-clamp(1-pow(t,.4)+4,0,1));
 #ifdef DOFOG
 						ret = GetFog(ret, fog, t);
 #endif

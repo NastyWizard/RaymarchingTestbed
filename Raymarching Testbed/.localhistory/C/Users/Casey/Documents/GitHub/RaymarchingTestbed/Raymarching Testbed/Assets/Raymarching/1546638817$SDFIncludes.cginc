@@ -40,14 +40,9 @@ float sdHeightMap(float3 p, float4 img)
 
 // OPERATIONS
 
-float3 opRep(float3 p, float3 c)
+float3 opRep(in float3 p, in float3 c)
 {
 	return abs(p) % c - 0.5*c;
-}
-
-float3 opHRep(float3 p, float x, float z) 
-{
-	return float3(abs(p.x) % x - .5 * x, p.y, abs(p.z) % z - .5 * z);
 }
 
 // union

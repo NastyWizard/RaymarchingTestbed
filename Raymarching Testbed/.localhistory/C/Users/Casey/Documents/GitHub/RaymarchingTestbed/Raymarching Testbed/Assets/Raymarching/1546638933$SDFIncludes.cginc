@@ -47,7 +47,7 @@ float3 opRep(float3 p, float3 c)
 
 float3 opHRep(float3 p, float x, float z) 
 {
-	return float3(abs(p.x) % x - .5 * x, p.y, abs(p.z) % z - .5 * z);
+	return float3(p.x % x, p.y, p.z % z);
 }
 
 // union

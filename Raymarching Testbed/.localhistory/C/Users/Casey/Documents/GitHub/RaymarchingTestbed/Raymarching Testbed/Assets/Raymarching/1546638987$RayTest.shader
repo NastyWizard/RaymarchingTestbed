@@ -88,7 +88,7 @@
 				float plane = sdPlane(planePos, float4(0, 1, 0, 0));
 				//
 				float3 spherePos = p + float3(0,0, 0);
-				float sphere = sdSphere(opHRep(spherePos,2,2), 1);
+				float sphere = sdSphere(opHRep(spherePos,1,1), 1);
 				return opUnion(sphere, plane);
 
 				//return opSub(FBMNoise(p, 5, 0.5, 3), plane);
