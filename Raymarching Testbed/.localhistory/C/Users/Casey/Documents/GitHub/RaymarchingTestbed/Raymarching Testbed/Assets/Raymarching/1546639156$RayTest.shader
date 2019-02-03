@@ -180,7 +180,7 @@
 				}
 			}
 
-			float4 Raymarch(float3 ro, float3 rd, float depth)
+			float4 raymarch(float3 ro, float3 rd, float depth)
 			{
 				fixed4 ret = fixed4(0, 0, 0, 0);
 
@@ -238,7 +238,7 @@
 				float depth = LinearEyeDepth(tex2D(_CameraDepthTexture, uv_Depth).r);
 				depth *= length(i.ray.xyz);
 
-				fixed4 add = Raymarch(ro, rd, depth);
+				fixed4 add = raymarch(ro, rd, depth);
 
 				return fixed4(col*(1.0-add.w) + add.xyz,1.0);
 			}

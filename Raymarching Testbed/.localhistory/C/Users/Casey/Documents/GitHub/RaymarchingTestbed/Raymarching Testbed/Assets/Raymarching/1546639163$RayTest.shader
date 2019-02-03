@@ -84,10 +84,10 @@
 				//float plane2 = sdPlane(p + float3(0, 10, 0), float4(0, 1, 0, 0));
 
 				// sphere lighting showcase
-				float3 planePos = p + float3(0, 0, 0);
+				float3 planePos = float3(0, 0, 0);
 				float plane = sdPlane(planePos, float4(0, 1, 0, 0));
 				//
-				float3 spherePos = p + float3(0,0, 0);
+				float3 spherePos = float3(0,0, 0);
 				float sphere = sdSphere(opHRep(spherePos,2,2), 1);
 				return opUnion(sphere, plane);
 
@@ -180,7 +180,7 @@
 				}
 			}
 
-			float4 Raymarch(float3 ro, float3 rd, float depth)
+			float4 raymarch(float3 ro, float3 rd, float depth)
 			{
 				fixed4 ret = fixed4(0, 0, 0, 0);
 
@@ -238,7 +238,7 @@
 				float depth = LinearEyeDepth(tex2D(_CameraDepthTexture, uv_Depth).r);
 				depth *= length(i.ray.xyz);
 
-				fixed4 add = Raymarch(ro, rd, depth);
+				fixed4 add = raymarch(ro, rd, depth);
 
 				return fixed4(col*(1.0-add.w) + add.xyz,1.0);
 			}
